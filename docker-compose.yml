@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: flat_matcher
+      POSTGRES_PASSWORD: flat_matcher
+      POSTGRES_DB: flat_matcher
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flat_matcher -d flat_matcher"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+      start_period: 5s
